@@ -7,7 +7,7 @@ export const auth = defineAuth({
       saml: {
         metadata: {
           metadataContent: process.env.SAML_METADATA_XML || '',
-          metadataType: 'XML',
+          metadataType: 'URL',
         },
         name: 'SAML',
       },
@@ -15,4 +15,5 @@ export const auth = defineAuth({
       logoutUrls: ['http://localhost:3000/auth/logout'],
     },
   },
+  groups: ['admin', 'user'],
 });

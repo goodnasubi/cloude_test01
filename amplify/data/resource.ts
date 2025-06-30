@@ -15,6 +15,7 @@ const schema = a.schema({
     .authorization((allow) => [
       allow.publicApiKey(),
       allow.authenticated(),
+      allow.groups(['admin']).to(['create', 'update', 'delete']),
     ]),
 
   UserService: a
@@ -27,6 +28,17 @@ const schema = a.schema({
     .authorization((allow) => [
       allow.owner(),
       allow.authenticated(),
+    ]),
+
+  UserGroup: a
+    .model({
+      userId: a.string().required(),
+      groupName: a.string().required(),
+      assignedAt: a.datetime(),
+    })
+    .authorization((allow) => [
+      allow.groups(['admin']).to(['create', 'read', 'update', 'delete']),
+      allow.authenticated().to(['read']),
     ]),
 });
 

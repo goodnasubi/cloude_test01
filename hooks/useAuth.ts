@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { authService } from '../lib/auth-service';
 import { Hub } from 'aws-amplify/utils';
+import { AuthUser } from 'aws-amplify/auth';
 
 export function useAuth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { authService, ServiceConfig } from '../lib/auth-service';
 import { useAuth } from '../hooks/useAuth';
+import { AuthUser } from 'aws-amplify/auth';
 
 export default function ServicePage() {
   const router = useRouter();
@@ -108,8 +109,8 @@ export default function ServicePage() {
 
         <div className="bg-blue-100 p-4 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">User Information</h2>
-          <p><strong>User ID:</strong> {user.userId}</p>
-          <p><strong>Email:</strong> {user.signInDetails?.loginId}</p>
+          <p><strong>User ID:</strong> {(user as AuthUser)?.userId}</p>
+          <p><strong>Email:</strong> {(user as AuthUser)?.signInDetails?.loginId}</p>
         </div>
       </div>
     </div>
